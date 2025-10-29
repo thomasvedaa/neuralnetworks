@@ -4,7 +4,7 @@ A semester project exploring time series prediction using a custom multilayer pe
 
 ---
 
-## What I Built
+## What we built
 
 This project forecasts **18 months ahead** for financial time series from the M3 Competition dataset. Instead of using off-the-shelf libraries, we implemented a custom neural network to understand the fundamentals of backpropagation and gradient descent.
 
