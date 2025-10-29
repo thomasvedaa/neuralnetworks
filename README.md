@@ -1,20 +1,59 @@
-# M3 Forecasting – Neural Network Semester Project
+# M3 Financial Forecasting with Neural Networks
 
-This project was developed as part of the **Neural Networks** course.  
-It implements a complete time series forecasting pipeline for monthly financial data from the **M3 Competition dataset**, focusing on preprocessing, neural network training, and evaluation.
+A semester project exploring time series prediction using a custom multilayer perceptron built from scratch.
 
 ---
 
-## Project Overview
+## What I Built
 
-The goal of this project is to forecast future values of financial time series using a **fully connected neural network (MLP)** trained on preprocessed data.  
-We focus on removing deterministic trends and seasonality before modeling, following a clean, reproducible ML pipeline.
+This project forecasts **18 months ahead** for financial time series from the M3 Competition dataset. Instead of using off-the-shelf libraries, we implemented a custom neural network to understand the fundamentals of backpropagation and gradient descent.
 
-**Main steps:**
-1. Load monthly financial time series from `M3Forecast.xls`
-2. Apply **polynomial detrending** (2nd-degree)
-3. Apply **12-month seasonal differencing**
-4. Normalize the residuals using a `StandardScaler`
-5. Train a custom **MLP** using gradient descent.
-6. Evaluate the model using a **12-month forecast horizon**
-7. Visualize results and reconstruct forecasts to original scale
+### The Pipeline
+
+**Data Preparation:**
+- Loaded 50 monthly financial series from the M3C dataset
+- Removed trends using 2nd-degree polynomial regression
+- Applied 12-month seasonal differencing to handle seasonality
+- Normalized everything using global scaling across all series
+
+**The Neural Network:**
+- Built a simple MLP from scratch (no TensorFlow/PyTorch)
+- Used `tanh` activation for the hidden layer
+- Implemented backpropagation with L2 regularization
+- Added early stopping to prevent overfitting
+
+**Training Strategy:**
+- Combined sequences from all 50 series for training
+- Grid search over hidden size, learning rate, and regularization
+- Trained final model on best hyperparameters
+- Forecasted iteratively: each prediction feeds into the next
+
+**Results:**
+- Generated 18-month forecasts for each series
+- Reversed all transformations to get predictions in original scale
+- Evaluated using MSE and MAPE metrics
+- Visualized prediction quality across all series
+
+---
+
+## Key Files
+
+- `processing.ipynb` - Main pipeline: preprocessing → training → forecasting → evaluation
+- `plots_timeseries.ipynb` - Visualization of the raw time series
+- `M3C.xls` - M3 Competition dataset (monthly financial data)
+
+---
+
+
+## Running the Project
+
+Just open `processing.ipynb` and run all cells. The notebook is self-contained and walks through the entire process with progress bars and detailed output.
+
+**Requirements:**
+```
+numpy, pandas, matplotlib, scikit-learn, tqdm
+```
+
+---
+
+Built with curiosity and a lot of caffeine.
